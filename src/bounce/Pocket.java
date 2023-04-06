@@ -9,7 +9,7 @@ public class Pocket {
     private final int x;
     private final int y;
 
-    public Pocket(Component c, int x, int y){
+    public Pocket(int x, int y) {
         this.x = x;
         this.y = y;
     }

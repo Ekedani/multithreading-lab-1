@@ -14,8 +14,8 @@ class Ball {
     private int dy = 2;
 
 
-    public Ball(Component c) {
-        this.canvas = c;
+    public Ball(Component component) {
+        this.canvas = component;
         if (Math.random() < 0.5) {
             x = new Random().nextInt(this.canvas.getWidth());
             y = 0;
