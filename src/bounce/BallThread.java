@@ -2,6 +2,7 @@ package bounce;
 
 public class BallThread extends Thread {
     private final Ball ball;
+
     public BallThread(Ball ball) {
         this.ball = ball;
     }
@@ -11,6 +12,9 @@ public class BallThread extends Thread {
         try {
             for (int i = 1; i < 10000; i++) {
                 ball.move();
+                if (ball.isInPocket()) {
+                    return;
+                }
                 System.out.println("Thread name = " + Thread.currentThread().getName());
                 Thread.sleep(5);
             }

@@ -55,7 +55,9 @@ class Ball {
 
     public boolean isInPocket() {
         final ArrayList<Pocket> pockets = tableCanvas.getPockets();
-        for (Pocket pocket : pockets) {}
+        for (Pocket pocket : pockets) {
+            return Math.random() < 0.005;
+        }
         return false;
     }
 }
