@@ -2,14 +2,21 @@ package bounce;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.util.ArrayList;
 
 public class TableCanvas extends JPanel {
     private final ArrayList<Ball> balls = new ArrayList<>();
-    private final ArrayList<Pocket> pockets = new ArrayList<>();
+    private ArrayList<Pocket> pockets = new ArrayList<>();
 
     public TableCanvas() {
-        createPockets();
+        addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentResized(ComponentEvent e) {
+                recreatePockets();
+            }
+        });
     }
 
     public void addBall(Ball ball) {
@@ -28,14 +35,21 @@ public class TableCanvas extends JPanel {
         }
     }
 
-    private void createPockets() {
-        final int canvasWidth = this.getWidth();
-        final int canvasHeight = this.getHeight();
+    public ArrayList<Pocket> getPockets() {
+        return this.pockets;
+    }
+
+    private void recreatePockets() {
+        this.pockets = new ArrayList<>();
+
+        int tableWidth = this.getWidth();
+        int tableHeight = this.getHeight();
+        int pocketWidth = Pocket.getWidth();
+        int pocketHeight = Pocket.getHeight();
+
         this.pockets.add(new Pocket(0, 0));
-        this.pockets.add(new Pocket(canvasWidth, 0));
-        this.pockets.add(new Pocket(0, canvasHeight));
-        this.pockets.add(new Pocket(canvasWidth, canvasHeight));
-        this.pockets.add(new Pocket(canvasWidth/2, 0));
-        this.pockets.add(new Pocket(canvasWidth/2, canvasHeight));
+        this.pockets.add(new Pocket(0, tableHeight - pocketHeight));
+        this.pockets.add(new Pocket(tableWidth - pocketWidth, 0));
+        this.pockets.add(new Pocket(tableWidth - pocketWidth, tableHeight - pocketHeight));
     }
 }

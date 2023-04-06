@@ -4,29 +4,29 @@ import javax.swing.*;
 import java.awt.*;
 
 public class BounceFrame extends JFrame {
-    private final TableCanvas ballCanvas;
-    public static final int WIDTH = 450;
-    public static final int HEIGHT = 350;
+    private final TableCanvas tableCanvas;
+    public static final int WIDTH = 550;
+    public static final int HEIGHT = 450;
 
     public BounceFrame() {
         this.setSize(WIDTH, HEIGHT);
         this.setTitle("bounce.Bounce program");
-        this.ballCanvas = new TableCanvas();
+        this.tableCanvas = new TableCanvas();
 
         System.out.println("In Frame Thread name = " + Thread.currentThread().getName());
         Container content = this.getContentPane();
-        content.add(this.ballCanvas, BorderLayout.CENTER);
+        content.add(this.tableCanvas, BorderLayout.CENTER);
 
         JPanel buttonPanel = new JPanel();
         buttonPanel.setBackground(Color.lightGray);
 
         JButton buttonStart = new JButton("Start");
         buttonStart.addActionListener(e -> {
-            Ball b = new Ball(ballCanvas);
-            ballCanvas.addBall(b);
-            BallThread thread = new BallThread(b);
-            thread.start();
-            System.out.println("Thread name = " + thread.getName());
+            Ball ball = new Ball(tableCanvas);
+            BallThread ballThread = new BallThread(ball);
+            tableCanvas.addBall(ball);
+            ballThread.start();
+            System.out.println("Thread name = " + ballThread.getName());
         });
 
         JButton buttonStop = new JButton("Stop");
