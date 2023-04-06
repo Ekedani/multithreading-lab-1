@@ -60,4 +60,8 @@ class Ball {
         }
         return false;
     }
+
+    public void die() {
+        this.tableCanvas.removeBall(this);
+    }
 }

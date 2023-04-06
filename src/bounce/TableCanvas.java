@@ -14,13 +14,17 @@ public class TableCanvas extends JPanel {
         addComponentListener(new ComponentAdapter() {
             @Override
             public void componentResized(ComponentEvent e) {
-                recreatePockets();
+                updatePockets();
             }
         });
     }
 
     public void addBall(Ball ball) {
         this.balls.add(ball);
+    }
+
+    public void removeBall(Ball ball) {
+        this.balls.remove(ball);
     }
 
     @Override
@@ -39,7 +43,7 @@ public class TableCanvas extends JPanel {
         return this.pockets;
     }
 
-    private void recreatePockets() {
+    private void updatePockets() {
         this.pockets = new ArrayList<>();
 
         int tableWidth = this.getWidth();
