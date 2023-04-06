@@ -4,8 +4,8 @@ import java.awt.*;
 import java.awt.geom.Ellipse2D;
 
 public class Pocket {
-    private static final int XSIZE = 20;
-    private static final int YSIZE = 20;
+    private static final int XSIZE = 30;
+    private static final int YSIZE = 30;
     private final int x;
     private final int y;
 
