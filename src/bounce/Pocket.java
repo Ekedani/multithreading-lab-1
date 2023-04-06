@@ -19,11 +19,16 @@ public class Pocket {
         g2.fill(new Ellipse2D.Double(x, y, WIDTH, HEIGHT));
     }
 
-    public static int getWidth(){
+    public boolean contains(int x, int y) {
+        final Ellipse2D pocketEllipse = new Ellipse2D.Double(this.x, this.y, WIDTH, HEIGHT);
+        return pocketEllipse.contains(x, y);
+    }
+
+    public static int getWidth() {
         return WIDTH;
     }
 
-    public static int getHeight(){
+    public static int getHeight() {
         return HEIGHT;
     }
 }

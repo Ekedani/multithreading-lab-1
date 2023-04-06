@@ -9,8 +9,8 @@ class Ball {
     private final TableCanvas tableCanvas;
     private static final int WIDTH = 20;
     private static final int HEIGHT = 20;
-    private int x = 0;
-    private int y = 0;
+    private int x;
+    private int y;
     private int dx = 2;
     private int dy = 2;
 
@@ -54,9 +54,13 @@ class Ball {
     }
 
     public boolean isInPocket() {
+        final int gravityCenterX = x + (WIDTH / 2);
+        final int gravityCenterY = y + (HEIGHT / 2);
         final ArrayList<Pocket> pockets = tableCanvas.getPockets();
         for (Pocket pocket : pockets) {
-            return Math.random() < 0.005;
+            if (pocket.contains(gravityCenterX, gravityCenterY)) {
+                return true;
+            }
         }
         return false;
     }
