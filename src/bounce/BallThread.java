@@ -2,8 +2,7 @@ package bounce;
 
 public class BallThread extends Thread {
     private final Ball ball;
-
-    private Runnable callback;
+    private final Runnable callback;
 
     public BallThread(Ball ball, Runnable callback) {
         this.ball = ball;

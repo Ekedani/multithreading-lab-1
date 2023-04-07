@@ -13,6 +13,7 @@ class Ball {
     private int y;
     private int dx = 2;
     private int dy = 2;
+    private Color color = Color.darkGray;
 
 
     public Ball(TableCanvas tableCanvas) {
@@ -26,9 +27,21 @@ class Ball {
         }
     }
 
+    public Ball(TableCanvas tableCanvas, Color color) {
+        this.tableCanvas = tableCanvas;
+        this.color = color;
+        if (Math.random() < 0.5) {
+            x = new Random().nextInt(this.tableCanvas.getWidth());
+            y = 0;
+        } else {
+            x = 0;
+            y = new Random().nextInt(this.tableCanvas.getHeight());
+        }
+    }
+
 
     public void draw(Graphics2D g2) {
-        g2.setColor(Color.darkGray);
+        g2.setColor(color);
         g2.fill(new Ellipse2D.Double(x, y, WIDTH, HEIGHT));
     }
 
