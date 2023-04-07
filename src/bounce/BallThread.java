@@ -3,8 +3,11 @@ package bounce;
 public class BallThread extends Thread {
     private final Ball ball;
 
-    public BallThread(Ball ball) {
+    private Runnable callback;
+
+    public BallThread(Ball ball, Runnable callback) {
         this.ball = ball;
+        this.callback = callback;
     }
 
     @Override
@@ -15,6 +18,7 @@ public class BallThread extends Thread {
                 ball.move();
                 if (ball.isInPocket()) {
                     ball.die();
+                    callback.run();
                     return;
                 }
                 Thread.sleep(5);

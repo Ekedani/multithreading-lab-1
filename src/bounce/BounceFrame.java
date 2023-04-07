@@ -5,6 +5,7 @@ import java.awt.*;
 
 public class BounceFrame extends JFrame {
     private final TableCanvas tableCanvas;
+    private int ballsInPocketCounter = 0;
     public static final int WIDTH = 550;
     public static final int HEIGHT = 450;
 
@@ -20,20 +21,30 @@ public class BounceFrame extends JFrame {
         JPanel buttonPanel = new JPanel();
         buttonPanel.setBackground(Color.lightGray);
 
-        JButton buttonStart = new JButton("Start");
-        buttonStart.addActionListener(e -> {
+        JLabel ballsInPocketLabel = new JLabel();
+        ballsInPocketLabel.setText("Balls in pockets: " + ballsInPocketCounter);
+        Runnable incrementBallsInPocket = () -> {
+            synchronized (this) {
+                ballsInPocketCounter++;
+                ballsInPocketLabel.setText("Balls in pockets: " + ballsInPocketCounter);
+            }
+        };
+
+        JButton startButton = new JButton("Start");
+        startButton.addActionListener(e -> {
             Ball ball = new Ball(tableCanvas);
-            BallThread ballThread = new BallThread(ball);
+            BallThread ballThread = new BallThread(ball, incrementBallsInPocket);
             tableCanvas.addBall(ball);
             ballThread.start();
             System.out.println("Thread name = " + ballThread.getName());
         });
 
-        JButton buttonStop = new JButton("Stop");
-        buttonStop.addActionListener(e -> System.exit(0));
+        JButton stopButton = new JButton("Stop");
+        stopButton.addActionListener(e -> System.exit(0));
 
-        buttonPanel.add(buttonStart);
-        buttonPanel.add(buttonStop);
+        buttonPanel.add(startButton);
+        buttonPanel.add(stopButton);
+        buttonPanel.add(ballsInPocketLabel);
         content.add(buttonPanel, BorderLayout.SOUTH);
     }
 }

@@ -5,6 +5,7 @@ import java.awt.*;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.util.ArrayList;
+import java.util.ConcurrentModificationException;
 
 public class TableCanvas extends JPanel {
     private final ArrayList<Ball> balls = new ArrayList<>();
@@ -23,19 +24,22 @@ public class TableCanvas extends JPanel {
         this.balls.add(ball);
     }
 
-    public void removeBall(Ball ball) {
+    public synchronized void removeBall(Ball ball) {
         this.balls.remove(ball);
     }
 
     @Override
     public void paintComponent(Graphics graphics) {
-        super.paintComponent(graphics);
-        Graphics2D g2 = (Graphics2D) graphics;
-        for (Pocket pocket : pockets) {
-            pocket.draw(g2);
-        }
-        for (Ball ball : balls) {
-            ball.draw(g2);
+        try {
+            super.paintComponent(graphics);
+            Graphics2D g2 = (Graphics2D) graphics;
+            for (Pocket pocket : pockets) {
+                pocket.draw(g2);
+            }
+            for (Ball ball : balls) {
+                ball.draw(g2);
+            }
+        } catch (ConcurrentModificationException ignored) {
         }
     }
 
