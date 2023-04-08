@@ -9,6 +9,13 @@ public class Main {
         incrementThread.start();
         decrementThread.start();
 
+        try {
+            incrementThread.join();
+            decrementThread.join();
+        } catch (InterruptedException e) {
+            System.out.println(e.getMessage());
+        }
+
         System.out.println("Final counter value: " + counter.getCounter());
 
         // May be replaced with lambdas like this:
