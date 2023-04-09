@@ -24,5 +24,10 @@ public class Main {
                 counter.increment();
             }
         });*/
+        /*Thread decrementThread = new Thread(() -> {
+            for (int i = 0; i < 10000; i++) {
+                counter.decrement();
+            }
+        });*/
     }
 }
