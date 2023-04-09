@@ -3,7 +3,7 @@ package counter;
 public class Counter {
     private int counter = 0;
 
-    public synchronized void increment() {
+    public synchronized void syncIncrement() {
         counter++;
         // Synchronized block:
         /*synchronized (this) {
@@ -11,7 +11,7 @@ public class Counter {
         }*/
     }
 
-    public synchronized void decrement() {
+    public synchronized void syncDecrement() {
         counter--;
     }
 

@@ -47,6 +47,7 @@ public class TableCanvas extends JPanel {
         return this.pockets;
     }
 
+
     private void updatePockets() {
         this.pockets = new ArrayList<>();
 

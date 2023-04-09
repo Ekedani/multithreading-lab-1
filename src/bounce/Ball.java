@@ -39,6 +39,13 @@ class Ball {
         }
     }
 
+    public Ball(TableCanvas tableCanvas, Color color, int x, int y) {
+        this.tableCanvas = tableCanvas;
+        this.color = color;
+        this.x = x;
+        this.y = y;
+    }
+
 
     public void draw(Graphics2D g2) {
         g2.setColor(color);
