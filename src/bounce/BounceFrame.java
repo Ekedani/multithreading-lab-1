@@ -25,7 +25,7 @@ public class BounceFrame extends JFrame {
         JLabel ballsInPocketLabel = new JLabel();
         ballsInPocketLabel.setText("Balls in pockets: " + ballsInPocketCounter);
         Runnable incrementBallsInPocket = () -> {
-            synchronized (this) {
+            synchronized (ballsInPocketLabel) {
                 ballsInPocketCounter++;
                 ballsInPocketLabel.setText("Balls in pockets: " + ballsInPocketCounter);
             }
@@ -77,7 +77,7 @@ public class BounceFrame extends JFrame {
     }
 
     private void initializePriorityExperimentControls(JPanel controlPanel, Runnable threadCallback) {
-        final int blueNum = 100;
+        final int blueNum = 500;
         JButton experimentButton = new JButton("Priority Experiment");
         experimentButton.addActionListener(e -> {
             final int startX = this.tableCanvas.getWidth() / 2;

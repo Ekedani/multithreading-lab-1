@@ -1,17 +1,27 @@
 package counter;
 
 public class Counter {
-    private int counter = 0;
+    protected int counter = 0;
 
     public synchronized void syncIncrement() {
         counter++;
-        // Synchronized block:
-        /*synchronized (this) {
+        /* synchronized (this) {
             counter++;
         }*/
     }
 
     public synchronized void syncDecrement() {
+        counter--;
+        /* synchronized (this) {
+            counter--;
+        }*/
+    }
+
+    public void asyncIncrement() {
+        counter++;
+    }
+
+    public void asyncDecrement() {
         counter--;
     }
 
